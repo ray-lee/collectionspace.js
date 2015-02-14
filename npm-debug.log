@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.34
+4 verbose cache add [ '.', null ]
+5 verbose cache add name=undefined spec="." args=[".",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: '.',
+6 verbose parsed url   path: '.',
+6 verbose parsed url   href: '.' }
+7 silly lockFile 3a52ce78- .
+8 verbose lock . /Users/ray/.npm/3a52ce78-.lock
+9 verbose tar pack [ '/Users/ray/.npm/collectionspace/0.0.1/package.tgz', '.' ]
+10 verbose tarball /Users/ray/.npm/collectionspace/0.0.1/package.tgz
+11 verbose folder .
+12 info prepublish collectionspace@0.0.1
+13 silly lockFile 1f1177db-tar tar://.
+14 verbose lock tar://. /Users/ray/.npm/1f1177db-tar.lock
+15 silly lockFile b48f3780-ollectionspace-0-0-1-package-tgz tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz
+16 verbose lock tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz /Users/ray/.npm/b48f3780-ollectionspace-0-0-1-package-tgz.lock
+17 silly lockFile 1f1177db-tar tar://.
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile b48f3780-ollectionspace-0-0-1-package-tgz tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz
+20 silly lockFile b48f3780-ollectionspace-0-0-1-package-tgz tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz
+21 silly lockFile ce7419ef-pm-collectionspace-0-0-1-package /Users/ray/.npm/collectionspace/0.0.1/package
+22 verbose lock /Users/ray/.npm/collectionspace/0.0.1/package /Users/ray/.npm/ce7419ef-pm-collectionspace-0-0-1-package.lock
+23 silly lockFile ce7419ef-pm-collectionspace-0-0-1-package /Users/ray/.npm/collectionspace/0.0.1/package
+24 silly lockFile ce7419ef-pm-collectionspace-0-0-1-package /Users/ray/.npm/collectionspace/0.0.1/package
+25 silly lockFile 3a52ce78- .
+26 silly lockFile 3a52ce78- .
+27 silly resolved [ { name: 'collectionspace',
+27 silly resolved     version: '0.0.1',
+27 silly resolved     description: 'CollectionSpace client for JavaScript',
+27 silly resolved     main: './lib/collectionspace.js',
+27 silly resolved     scripts: { test: 'echo "Error: no test specified" && exit 1' },
+27 silly resolved     author: { name: 'Ray Lee', email: 'rhlee@berkeley.edu' },
+27 silly resolved     license: 'ECL-2.0',
+27 silly resolved     dependencies: { extend: '^2.0.0', q: '^1.1.2', superagent: '^0.21.0' },
+27 silly resolved     readme: 'ERROR: No README data found!',
+27 silly resolved     readmeFilename: 'README.md',
+27 silly resolved     _id: 'collectionspace@0.0.1',
+27 silly resolved     _shasum: 'b0e06826f4a9cd23f9ded7819ee3afc241ba9d9a',
+27 silly resolved     _from: '.' } ]
+28 info install collectionspace@0.0.1 into /usr/local/lib
+29 info installOne collectionspace@0.0.1
+30 verbose lib/node_modules/collectionspace unbuild
+31 verbose tar unpack /Users/ray/.npm/collectionspace/0.0.1/package.tgz
+32 silly lockFile 82b5fdb6-lib-node-modules-collectionspace tar:///usr/local/lib/node_modules/collectionspace
+33 verbose lock tar:///usr/local/lib/node_modules/collectionspace /Users/ray/.npm/82b5fdb6-lib-node-modules-collectionspace.lock
+34 silly lockFile b48f3780-ollectionspace-0-0-1-package-tgz tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz
+35 verbose lock tar:///Users/ray/.npm/collectionspace/0.0.1/package.tgz /Users/ray/.npm/b48f3780-ollectionspace-0-0-1-package-tgz.lock
+36 silly gunzTarPerm modes [ '755', '644' ]
+37 error Error: EACCES, mkdir '/usr/local/lib/node_modules/collectionspace'
+37 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/collectionspace']
+37 error   errno: 3,
+37 error   code: 'EACCES',
+37 error   path: '/usr/local/lib/node_modules/collectionspace',
+37 error   fstream_type: 'Directory',
+37 error   fstream_path: '/usr/local/lib/node_modules/collectionspace',
+37 error   fstream_class: 'DirWriter',
+37 error   fstream_stack:
+37 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+37 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+37 error      'Object.oncomplete (fs.js:108:15)' ] }
+38 error Please try running this command again as root/Administrator.
+39 error System Darwin 14.1.0
+40 error command "node" "/usr/local/bin/npm" "install" "-g"
+41 error cwd /Users/ray/Source/collectionspace.js
+42 error node -v v0.10.34
+43 error npm -v 1.4.28
+44 error path /usr/local/lib/node_modules/collectionspace
+45 error fstream_path /usr/local/lib/node_modules/collectionspace
+46 error fstream_type Directory
+47 error fstream_class DirWriter
+48 error code EACCES
+49 error errno 3
+50 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/collectionspace'
+51 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+51 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+51 error fstream_stack Object.oncomplete (fs.js:108:15)
+52 verbose exit [ 3, true ]
