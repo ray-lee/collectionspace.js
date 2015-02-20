@@ -15,7 +15,7 @@ $ npm test
 
 All methods are asynchronous, and return a [Promises/A+](https://github.com/promises-aplus/promises-spec) compliant [promise](http://www.html5rocks.com/en/tutorials/es6/promises/), created with the [Q](http://documentup.com/kriskowal/q/) library.
 
-See the examples for usage in Node.js.
+See the [examples](https://github.com/ray-lee/collectionspace.js/tree/master/examples) for usage in Node.js.
 
 To run an example:
 

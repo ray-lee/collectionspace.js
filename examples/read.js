@@ -1,3 +1,7 @@
+/*
+ * Retrieve a collectionobject by csid and print it to the console.
+ */
+
 var CollectionSpace = require('../lib/collectionspace');
 var util = require('util');
 
