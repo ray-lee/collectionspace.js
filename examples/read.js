@@ -16,7 +16,7 @@ cspace.connect('admin@core.collectionspace.org', 'Administrator')
     }));
   })
   .then(function() {
-    cspace.disconnect();
+    return cspace.disconnect();
   })
   .then(null, function(error) {
     console.error(error);
