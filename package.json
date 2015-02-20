@@ -4,7 +4,7 @@
   "description": "CollectionSpace client for JavaScript",
   "main": "./lib/collectionspace.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Ray Lee <rhlee@berkeley.edu>",
   "license": "ECL-2.0",
@@ -12,5 +12,10 @@
     "extend": "^2.0.0",
     "q": "^1.1.2",
     "superagent": "^0.21.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "chai": "^2.0.0",
+    "chai-as-promised": "^4.2.0"
   }
 }
