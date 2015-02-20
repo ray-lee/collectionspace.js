@@ -2,6 +2,10 @@
   "name": "collectionspace",
   "version": "0.0.1",
   "description": "CollectionSpace client for JavaScript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ray-lee/collectionspace.js.git"
+  },
   "main": "./lib/collectionspace.js",
   "scripts": {
     "test": "mocha"
