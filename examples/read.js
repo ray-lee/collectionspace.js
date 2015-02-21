@@ -18,8 +18,7 @@ cspace.connect('admin@core.collectionspace.org', 'Administrator')
       depth: 6,
       colors: true
     }));
-  })
-  .then(function() {
+
     return cspace.disconnect();
   })
   .then(null, function(error) {
