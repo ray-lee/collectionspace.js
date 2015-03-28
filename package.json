@@ -13,13 +13,12 @@
   "author": "Ray Lee <rhlee@berkeley.edu>",
   "license": "ECL-2.0",
   "dependencies": {
-    "extend": "^2.0.0",
-    "q": "^1.1.2",
-    "superagent": "^0.21.0"
+    "q": "^1.2.0",
+    "superagent": "^1.1.0"
   },
   "devDependencies": {
-    "mocha": "^2.1.0",
-    "chai": "^2.0.0",
-    "chai-as-promised": "^4.2.0"
+    "mocha": "^2.2.1",
+    "chai": "^2.2.0",
+    "chai-as-promised": "^4.3.0"
   }
 }
