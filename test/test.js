@@ -17,6 +17,7 @@ describe('CollectionSpace', function() {
   
   var RECORD_TYPE = 'cataloging';
   var RECORD_CSID = '0f72eb05-ebc3-477f-86d0';
+  var BAD_RECORD_CSID = 'foobar';
   
   describe('#connect()', function() {
     var cspace;
@@ -142,6 +143,10 @@ describe('CollectionSpace', function() {
             .have.property('csid', RECORD_CSID)
             .and.have.property('fields');
       });
+    });
+    
+    it('should error when a record is not found with the csid', function() {
+      return cspace.getRecord(RECORD_TYPE, BAD_RECORD_CSID).should.eventually.be.rejectedWith(/Does not exist/);
     });
   });
 });
