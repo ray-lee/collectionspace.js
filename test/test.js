@@ -15,10 +15,14 @@ describe('CollectionSpace', function() {
   var BAD_HOST = HOST + 'abc';
   var BAD_PASSWORD = PASSWORD + 'xyz';
   
-  var RECORD_TYPE = 'cataloging';
+  var VOCABULARY_SHORT_ID = 'currency';
+  
+  var RECORD_TYPE = 'collectionobject';
   var RECORD_CSID = '0f72eb05-ebc3-477f-86d0';
   var BAD_RECORD_CSID = 'foobar';
-  
+
+  this.timeout(20000);
+    
   describe('#connect()', function() {
     var cspace;
     
@@ -123,6 +127,31 @@ describe('CollectionSpace', function() {
     });
   });
   
+  describe('#getVocabulary', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+
+    it('should error when not connected', function() {
+      return cspace.getVocabulary(VOCABULARY_SHORT_ID).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return a record with the correct short id', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.getVocabulary(VOCABULARY_SHORT_ID).should.eventually
+            .have.property('fields')
+            .and.contain.all.keys('shortIdentifier', 'terms')
+            .and.have.property('shortIdentifier', VOCABULARY_SHORT_ID)
+        );
+      });
+    });
+  });
+ 
   describe('#getRecord', function() {
     var cspace;
     
@@ -138,10 +167,11 @@ describe('CollectionSpace', function() {
     
     it('should return a record with the correct csid', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
-        return 
+        return (
           cspace.getRecord(RECORD_TYPE, RECORD_CSID).should.eventually
-            .have.property('csid', RECORD_CSID)
-            .and.have.property('fields');
+            .contain.all.keys(['csid', 'fields'])
+            .and.have.property('csid', RECORD_CSID)
+        );
       });
     });
     

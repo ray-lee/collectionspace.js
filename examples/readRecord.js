@@ -11,7 +11,7 @@ var cspace = new CollectionSpace({
 
 cspace.connect('admin@core.collectionspace.org', 'Administrator')
   .then(function() {
-    return cspace.getRecord('cataloging', '0f72eb05-ebc3-477f-86d0');
+    return cspace.getRecord('collectionobject', '0f72eb05-ebc3-477f-86d0');
   })
   .then(function(data) {
     console.log(util.inspect(data, {
