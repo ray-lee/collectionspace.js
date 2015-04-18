@@ -42,12 +42,16 @@ describe('CollectionSpace', function() {
       return cspace.connect(USERNAME, BAD_PASSWORD).should.eventually.be.rejectedWith(/ELOGINFAILED/);
     });
     
-    it('should return true when successful', function() {
+    it('should return a connection status when successful', function() {
       cspace = new CollectionSpace({
         host: HOST
       });
       
-      return cspace.connect(USERNAME, PASSWORD).should.eventually.be.true;
+      return(
+        cspace.connect(USERNAME, PASSWORD).should.eventually
+          .contain.all.keys('userId', 'screenName', 'permissions', 'login', 'maxInactive')
+          .and.have.property('userId', USERNAME)
+      );
     });
   });
   
@@ -60,18 +64,18 @@ describe('CollectionSpace', function() {
       });
     });
     
-    it('should error when not connected', function() {
-      return cspace.disconnect().should.eventually.be.rejectedWith(/ENOTCONNECTED/);
-    });
-    
     it('should return true when successful', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
         return cspace.disconnect().should.eventually.be.true;
       });
     });
+
+    it('should be successful when not connected', function() {
+      return cspace.disconnect().should.eventually.be.true;
+    });
   });
   
-  describe('#connected', function() {
+  describe('#getConnectionStatus()', function() {
     var cspace;
     
     before(function() {
@@ -80,54 +84,47 @@ describe('CollectionSpace', function() {
       });
     });
 
-    it('should initially be false', function() {
-      cspace.connected.should.be.false;
+    it('should initially be have a false login property', function() {
+      return(
+        cspace.getConnectionStatus().should.eventually
+          .have.property('login', false)
+      );
     });
     
-    it('should be true after connecting', function() {
+    it('should have a true login property after connecting', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
-        cspace.connected.should.be.true;
-      });
-    });
-    
-    it('should be false after disconnecting', function() {
-      return cspace.connect(USERNAME, PASSWORD).then(function() {
-        return cspace.disconnect().then(function() {
-          cspace.connected.should.be.false;
-        });
-      });
-    });
-  });
-  
-  describe('#username', function() {
-    var cspace;
-    
-    before(function() {
-      cspace = new CollectionSpace({
-        host: HOST
+        return(
+          cspace.getConnectionStatus().should.eventually
+            .have.property('login', true)
+        );
       });
     });
 
-    it('should initially be null', function() {
-      expect(cspace.username).to.be.null;
-    });
-    
-    it('should be the logged in username after connecting', function() {
+    it('should have a false login property after disconnecting', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
-        cspace.username.should.equal(USERNAME);
+        return cspace.disconnect().then(function() {
+          return(
+            cspace.getConnectionStatus().should.eventually
+              .have.property('login', false)
+          );
+        });
       });
     });
     
-    it('should be null after disconnecting', function() {
+    it('should return a cached status on consecutive calls', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
         return cspace.disconnect().then(function() {
-          expect(cspace.username).to.be.null;
+          return cspace.getConnectionStatus().then(function(status1) {
+            return(
+              cspace.getConnectionStatus().should.eventually.equal(status1)
+            );
+          });
         });
       });
     });
   });
   
-  describe('#getVocabulary', function() {
+  describe('#getVocabulary()', function() {
     var cspace;
     
     before(function() {
@@ -152,7 +149,7 @@ describe('CollectionSpace', function() {
     });
   });
  
-  describe('#getRecord', function() {
+  describe('#getRecord()', function() {
     var cspace;
     
     before(function() {
