@@ -19,6 +19,7 @@ describe('CollectionSpace', function() {
   
   var RECORD_TYPE = 'collectionobject';
   var RECORD_CSID = '0f72eb05-ebc3-477f-86d0';
+  var UPDATE_CSID = 'cc2f452f-8baf-445a-9160';
   var BAD_RECORD_CSID = 'foobar';
 
   this.timeout(20000);
@@ -208,6 +209,43 @@ describe('CollectionSpace', function() {
           cspace.createRecord(RECORD_TYPE, data).should.eventually
             .contain.all.keys(['csid', 'fields'])
             .and.have.deep.property('fields.objectNumber', objectNumber)
+        );
+      });
+    });
+  });
+  
+  describe('#updateRecord()', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+
+    var now = new Date();
+    var objectNumber = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+    var comment = 'Record updated by collectionspace.js on ' + now.toString();
+    
+    var data = {
+      fields: {
+        objectNumber: objectNumber,
+        comments: [{
+          comment: comment
+        }]
+      }
+    };
+    
+    it('should error when not connected', function() {
+      return cspace.updateRecord(RECORD_TYPE, data).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return a record with the correct csid and the updated data', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.updateRecord(RECORD_TYPE, UPDATE_CSID, data).should.eventually
+            .contain.all.keys(['csid', 'fields'])
+            .and.have.deep.property('fields.comments.0.comment', comment)
         );
       });
     });
