@@ -176,4 +176,40 @@ describe('CollectionSpace', function() {
       return cspace.getRecord(RECORD_TYPE, BAD_RECORD_CSID).should.eventually.be.rejectedWith(/Does not exist/);
     });
   });
+  
+  describe('#createRecord()', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+
+    var now = new Date();
+    var objectNumber = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+    
+    var data = {
+      fields: {
+        objectNumber: objectNumber,
+        briefDescriptions: [{
+          briefDescription: 'Record created by collectionspace.js'
+        }]
+      }
+    };
+    
+    it('should error when not connected', function() {
+      return cspace.createRecord(RECORD_TYPE, data).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return a record with a csid and the correct data', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.createRecord(RECORD_TYPE, data).should.eventually
+            .contain.all.keys(['csid', 'fields'])
+            .and.have.deep.property('fields.objectNumber', objectNumber)
+        );
+      });
+    });
+  });
 });
