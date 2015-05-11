@@ -21,7 +21,10 @@ describe('CollectionSpace', function() {
   var RECORD_CSID = '0f72eb05-ebc3-477f-86d0';
   var UPDATE_CSID = 'cc2f452f-8baf-445a-9160';
   var BAD_RECORD_CSID = 'foobar';
-
+  
+  var AUTHORITY_FIELD_NAME = 'inscriptionContentInscriber';
+  var AUTHORITY_SEARCH_STRING = 'john';
+  
   this.timeout(20000);
     
   describe('#connect()', function() {
@@ -246,6 +249,31 @@ describe('CollectionSpace', function() {
           cspace.updateRecord(RECORD_TYPE, UPDATE_CSID, data).should.eventually
             .contain.all.keys(['csid', 'fields'])
             .and.have.deep.property('fields.comments.0.comment', comment)
+        );
+      });
+    });
+  });
+  
+  describe('#searchAuthority()', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+    
+    it('should error when not connected', function() {
+      return cspace.searchAuthority(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return a list of results', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.searchAuthority(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually
+            .be.an('array')
+            .and.have.property(0)
+            .which.contains.all.keys(['csid', 'displayNames', 'type', 'baseUrn', 'namespace'])
         );
       });
     });
