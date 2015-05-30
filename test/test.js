@@ -254,7 +254,7 @@ describe('CollectionSpace', function() {
     });
   });
   
-  describe('#searchAuthority()', function() {
+  describe('#findTerms()', function() {
     var cspace;
     
     before(function() {
@@ -264,13 +264,13 @@ describe('CollectionSpace', function() {
     });
     
     it('should error when not connected', function() {
-      return cspace.searchAuthority(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+      return cspace.findTerms(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
     });
     
     it('should return a list of results', function() {
       return cspace.connect(USERNAME, PASSWORD).then(function() {
         return (
-          cspace.searchAuthority(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually
+          cspace.findTerms(RECORD_TYPE, AUTHORITY_FIELD_NAME, AUTHORITY_SEARCH_STRING).should.eventually
             .be.an('array')
             .and.have.property(0)
             .which.contains.all.keys(['csid', 'displayNames', 'type', 'baseUrn', 'namespace'])

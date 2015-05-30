@@ -11,7 +11,7 @@ var cspace = new CollectionSpace({
 
 cspace.connect('admin@core.collectionspace.org', 'Administrator')
   .then(function() {
-    return cspace.searchAuthority('collectionobject', 'inscriptionContentInscriber', 'john');
+    return cspace.findTerms('collectionobject', 'inscriptionContentInscriber', 'john');
   })
   .then(function(data) {
     console.log(util.inspect(data, {
