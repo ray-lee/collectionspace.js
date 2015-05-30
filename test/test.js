@@ -278,4 +278,29 @@ describe('CollectionSpace', function() {
       });
     });
   });
+  
+  describe('#findTermsUsed()', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+    
+    it('should error when not connected', function() {
+      return cspace.findTermsUsed(RECORD_TYPE, RECORD_CSID).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return results', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.findTermsUsed(RECORD_TYPE, RECORD_CSID).should.eventually
+            .be.an('object')
+            .and.have.property('termsUsed')
+            .which.contains.all.keys(['results', 'pagination'])
+        );
+      });
+    });
+  });
 });
