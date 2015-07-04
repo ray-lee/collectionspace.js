@@ -11,9 +11,9 @@ var cspace = new CollectionSpace({
 
 cspace.connect('admin@core.collectionspace.org', 'Administrator')
   .then(function() {
-    return cspace.updateRecord('collectionobject', 'cc2f452f-8baf-445a-9160', {
+    return cspace.updateRecord('collectionobject', '0c859c44-7b92-4bca-91bf', {
       fields: {
-        objectNumber: '2015.4.24',
+        objectNumber: '2015.7.3',
         comments: [{
           comment: "Record updated by collectionspace.js on " + (new Date()).toString()
         }]

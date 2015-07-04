@@ -1,5 +1,5 @@
 /*
- * Find authority terms used by a collectionobject, and print them to the console.
+ * Search for collectionobjects with keywords, and print them to the console.
  */
 
 var CollectionSpace = require('../lib/collectionspace');
@@ -11,7 +11,7 @@ var cspace = new CollectionSpace({
 
 cspace.connect('admin@core.collectionspace.org', 'Administrator')
   .then(function() {
-    return cspace.findTermsUsed('collectionobject', '0c859c44-7b92-4bca-91bf', {
+    return cspace.search('collectionobject', 'school photographs', {
       pageSize: 10,
       pageNum: 0
     });

@@ -18,12 +18,14 @@ describe('CollectionSpace', function() {
   var VOCABULARY_SHORT_ID = 'currency';
   
   var RECORD_TYPE = 'collectionobject';
-  var RECORD_CSID = '0f72eb05-ebc3-477f-86d0';
-  var UPDATE_CSID = 'cc2f452f-8baf-445a-9160';
+  var RECORD_CSID = '0c859c44-7b92-4bca-91bf';
+  var UPDATE_CSID = '0c859c44-7b92-4bca-91bf';
   var BAD_RECORD_CSID = 'foobar';
   
   var AUTHORITY_FIELD_NAME = 'inscriptionContentInscriber';
   var AUTHORITY_SEARCH_STRING = 'john';
+  
+  var SEARCH_KEYWORDS = 'school photographs';
   
   this.timeout(20000);
     
@@ -299,6 +301,30 @@ describe('CollectionSpace', function() {
             .be.an('object')
             .and.have.property('termsUsed')
             .which.contains.all.keys(['results', 'pagination'])
+        );
+      });
+    });
+  });
+  
+  describe('#search()', function() {
+    var cspace;
+    
+    before(function() {
+      cspace = new CollectionSpace({
+        host: HOST
+      });
+    });
+    
+    it('should error when not connected', function() {
+      return cspace.search(RECORD_TYPE, SEARCH_KEYWORDS).should.eventually.be.rejectedWith(/ENOTCONNECTED/);
+    });
+    
+    it('should return results', function() {
+      return cspace.connect(USERNAME, PASSWORD).then(function() {
+        return (
+          cspace.search(RECORD_TYPE, SEARCH_KEYWORDS).should.eventually
+            .be.an('object')
+            .and.have.property('results')
         );
       });
     });
